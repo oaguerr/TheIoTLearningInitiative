@@ -4,7 +4,6 @@ import atexit
 import ConfigParser
 import dweepy
 import signal
-import sys
 import time
 import threading
 import pytz #need to add to setup.sh pip install pytz
