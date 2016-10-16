@@ -208,18 +208,29 @@ if __name__ == '__main__':
     threadlcd = threading.Thread(target = displayOutput, args=("task",))
     threadlcd.start()
 
-    message = "System Running"
+
+    msgStatus = "System Running"
 
     while True:
 	if controlmode == 1:
 	    functionAutoMode()
 	luxes = light.value()
 	temp = gTemp.getTemperature()
-        datafreeboard = {}
+        if Angle == 0:
+	    msgBlinds = "Blinds Open"
+	else:
+	    msgBlinds = "Blinds Closed"
+	if relay.isOn():
+	    msgLight = "Lights on"
+	else:
+	    msgLight = "Lights off"
+	datafreeboard = {}
         datafreeboard['alive'] = "1"
         datafreeboard['luxes'] =  luxes
 	datafreeboard['Temp'] = temp
-        datafreeboard['message'] = message
+        datafreeboard['blinds'] = msgBlinds
+        datafreeboard['light'] = msgLight
+        datafreeboard['message'] = msgStatus
         dweepy.dweet_for('domotics', datafreeboard)
 	time.sleep(1)
 
